@@ -80,7 +80,7 @@ public class ModelService {
             if (request.getTextoEntrenamiento() != null) {
                 existingModel.setTextoEntrenamiento(request.getTextoEntrenamiento());
 
-                // Re-entrenar el modelo si hay nuevo texto
+
                 try {
                     nativeService.initializeModel(request.getOrden());
                     nativeService.trainModel(request.getTextoEntrenamiento());
@@ -126,7 +126,7 @@ public class ModelService {
         return response;
     }
 
-    // Métodos auxiliares para simular estadísticas
+
     private int calculateVocabularySize(String text) {
         if (text == null || text.trim().isEmpty()) return 0;
         return (int) text.toLowerCase().split("\\s+").length;

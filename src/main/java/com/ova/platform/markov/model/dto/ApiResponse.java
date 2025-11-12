@@ -23,7 +23,6 @@ public class ApiResponse<T> {
         this.data = data;
     }
 
-    // Getters and Setters
     public boolean isSuccess() {
         return success;
     }
@@ -64,7 +63,7 @@ public class ApiResponse<T> {
         this.path = path;
     }
 
-    // Métodos estáticos
+
     public static <T> ApiResponse<T> success(T data, String message) {
         return new ApiResponse<>(true, message, data);
     }

@@ -13,7 +13,7 @@ public class ModelResponse {
     private LocalDateTime fechaActualizacion;
     private String estado;
 
-    // Getters and Setters
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

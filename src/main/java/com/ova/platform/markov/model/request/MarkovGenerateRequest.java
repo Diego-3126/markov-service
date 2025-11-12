@@ -17,7 +17,7 @@ public class MarkovGenerateRequest {
     @Max(value = 5, message = "El orden no puede exceder 5")
     private int orden = 2;
 
-    // Constructores
+
     public MarkovGenerateRequest() {
     }
 
@@ -27,7 +27,7 @@ public class MarkovGenerateRequest {
         this.orden = orden;
     }
 
-    // Getters and Setters
+
     public String getTextoInicio() {
         return textoInicio;
     }

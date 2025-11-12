@@ -37,7 +37,7 @@ public class MarkovModel {
     @Column(name = "estado")
     private String estado = "ACTIVO"; // ACTIVO, INACTIVO, ENTRENANDO
 
-    // Constructores
+
     public MarkovModel() {
         this.fechaCreacion = LocalDateTime.now();
         this.fechaActualizacion = LocalDateTime.now();
@@ -50,7 +50,7 @@ public class MarkovModel {
         this.orden = orden;
     }
 
-    // Getters and Setters
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -85,7 +85,7 @@ public class MarkovModel {
     public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
 
-    // Método para actualizar timestamp
+
     @PreUpdate
     public void preUpdate() {
         this.fechaActualizacion = LocalDateTime.now();

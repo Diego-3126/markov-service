@@ -18,7 +18,7 @@ public class CreateModelRequest {
 
     private String textoEntrenamiento;
 
-    // Getters and Setters
+
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
 

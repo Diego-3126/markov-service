@@ -23,18 +23,17 @@ public class MarkovService {
             logger.info("Iniciando generación de texto - Inicio: '{}', Longitud: {}, Orden: {}",
                     request.getTextoInicio(), request.getLongitud(), request.getOrden());
 
-            // Inicializar modelo si es necesario
+
             nativeService.initializeModel(request.getOrden());
 
-            // Entrenar con texto básico si no hay modelo entrenado
-            // En una implementación real, esto vendría de base de datos o archivo
+
             String trainingText = "Las cadenas de Markov son modelos probabilísticos muy útiles " +
                     "para la generación de texto automático. Estos modelos aprenden " +
                     "patrones del lenguaje natural y pueden crear contenido nuevo " +
                     "basado en probabilidades estadísticas.";
             nativeService.trainModel(trainingText);
 
-            // Generar texto
+
             String textoGenerado = nativeService.generateText(
                     request.getLongitud(),
                     request.getTextoInicio()
@@ -42,7 +41,7 @@ public class MarkovService {
 
             long endTime = System.currentTimeMillis();
 
-            // Construir respuesta
+
             response.setExito(true);
             response.setTextoGenerado(textoGenerado);
             response.setTextoInicio(request.getTextoInicio());

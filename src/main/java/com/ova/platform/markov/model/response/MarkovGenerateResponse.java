@@ -13,7 +13,7 @@ public class MarkovGenerateResponse {
     private boolean exito;
     private String mensaje;
 
-    // Constructores
+
     public MarkovGenerateResponse() {
     }
 
@@ -22,7 +22,7 @@ public class MarkovGenerateResponse {
         this.mensaje = mensaje;
     }
 
-    // Getters and Setters
+
     public String getTextoGenerado() {
         return textoGenerado;
     }

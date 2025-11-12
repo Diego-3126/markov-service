@@ -15,7 +15,7 @@ public class MarkovNativeService {
 
     private static final Logger logger = LoggerFactory.getLogger(MarkovNativeService.class);
 
-    // Configuración simple con @Value
+
     @Value("${markov.native.library-path:src/main/resources/native/libmarkovova.so}")
     private String libraryPath;
 
@@ -28,9 +28,8 @@ public class MarkovNativeService {
     @Value("${markov.native.debug-mode:true}")
     private boolean debugMode;
 
-    // Interfaz para la librería nativa - CORREGIDA: sin inicialización estática
+
     public interface MarkovLibrary extends Library {
-        // Solo declaramos los métodos, la instancia la creamos después
         Pointer markov_create_model(int order);
         void markov_train_model(Pointer model, String text);
         String markov_generate_text(Pointer model, int length, String start);
@@ -59,7 +58,7 @@ public class MarkovNativeService {
             } else {
                 logger.warn("⚠️  Librería nativa no encontrada en: {}", libraryPath);
 
-                // Intentar cargar por nombre
+
                 try {
                     System.loadLibrary(libraryName);
                     libraryLoaded = true;

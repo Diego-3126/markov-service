@@ -1,4 +1,3 @@
-# src/main/resources/application.yml
 server:
   port: 8083
   servlet:
@@ -10,30 +9,28 @@ spring:
   profiles:
     active: dev
 
-  # ✅ CONFIGURACIÓN BASE DE DATOS H2 (NUEVO)
   datasource:
     url: jdbc:h2:mem:markovdb
     driver-class-name: org.h2.Driver
     username: sa
     password: ""
 
-  # ✅ CONFIGURACIÓN JPA (NUEVO)
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create-drop  # Crea las tablas automáticamente
-    show-sql: true           # Muestra SQL en logs (útil para desarrollo)
+      ddl-auto: create-drop
+    show-sql: true
     properties:
       hibernate:
-        format_sql: true     # Formatea el SQL para mejor legibilidad
+        format_sql: true
 
-  # ✅ CONSOLA H2 (NUEVO - para ver la BD en navegador)
+
   h2:
     console:
       enabled: true
       path: /h2-console
 
-# Spring Boot Actuator
+
 management:
   endpoints:
     web:
@@ -43,7 +40,7 @@ management:
     health:
       show-details: always
 
-# Configuración Markov
+
 markov:
   native:
     library-path: src/main/resources/native/libmarkovova.so
@@ -51,12 +48,11 @@ markov:
     fallback-enabled: true
     debug-mode: true
 
-# Logging
 logging:
   level:
     com.ova.platform.markov: DEBUG
     org.springframework.web: INFO
-    org.hibernate.SQL: DEBUG        # ✅ NUEVO - ver queries SQL
-    org.hibernate.type: TRACE       # ✅ NUEVO - ver parámetros SQL
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %-5level - %logger{50} - %msg%n"
