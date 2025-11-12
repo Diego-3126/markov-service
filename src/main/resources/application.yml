@@ -1,0 +1,34 @@
+# src/main/resources/application.yml
+server:
+  port: 8083
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: markov-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+# Configuración Markov
+markov:
+  native:
+    library-path: src/main/resources/native/libmarkovova.so
+    library-name: markov
+    fallback-enabled: true
+    debug-mode: true
+
+# Logging (puedes ajustar según necesites)
+logging:
+  level:
+    com.ova.platform.markov: DEBUG
+    org.springframework.web: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %-5level - %logger{50} - %msg%n"
