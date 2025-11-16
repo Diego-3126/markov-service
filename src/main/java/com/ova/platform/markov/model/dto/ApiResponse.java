@@ -1,7 +1,6 @@
 package com.ova.platform.markov.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.time.LocalDateTime;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -23,46 +22,20 @@ public class ApiResponse<T> {
         this.data = data;
     }
 
-    public boolean isSuccess() {
-        return success;
-    }
+    public boolean isSuccess() { return success; }
+    public void setSuccess(boolean success) { this.success = success; }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
 
-    public String getMessage() {
-        return message;
-    }
+    public T getData() { return data; }
+    public void setData(T data) { this.data = data; }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+    public LocalDateTime getTimestamp() { return timestamp; }
+    public void setTimestamp(LocalDateTime timestamp) { this.timestamp = timestamp; }
 
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
+    public String getPath() { return path; }
+    public void setPath(String path) { this.path = path; }
 
     public static <T> ApiResponse<T> success(T data, String message) {
         return new ApiResponse<>(true, message, data);

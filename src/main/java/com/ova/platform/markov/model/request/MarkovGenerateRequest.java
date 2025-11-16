@@ -17,9 +17,7 @@ public class MarkovGenerateRequest {
     @Max(value = 5, message = "El orden no puede exceder 5")
     private int orden = 2;
 
-
-    public MarkovGenerateRequest() {
-    }
+    public MarkovGenerateRequest() {}
 
     public MarkovGenerateRequest(String textoInicio, int longitud, int orden) {
         this.textoInicio = textoInicio;
@@ -27,28 +25,12 @@ public class MarkovGenerateRequest {
         this.orden = orden;
     }
 
+    public String getTextoInicio() { return textoInicio; }
+    public void setTextoInicio(String textoInicio) { this.textoInicio = textoInicio; }
 
-    public String getTextoInicio() {
-        return textoInicio;
-    }
+    public int getLongitud() { return longitud; }
+    public void setLongitud(int longitud) { this.longitud = longitud; }
 
-    public void setTextoInicio(String textoInicio) {
-        this.textoInicio = textoInicio;
-    }
-
-    public int getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(int longitud) {
-        this.longitud = longitud;
-    }
-
-    public int getOrden() {
-        return orden;
-    }
-
-    public void setOrden(int orden) {
-        this.orden = orden;
-    }
+    public int getOrden() { return orden; }
+    public void setOrden(int orden) { this.orden = orden; }
 }

@@ -3,7 +3,9 @@ package com.ova.platform.markov.controller;
 import com.ova.platform.markov.model.dto.ApiResponse;
 import com.ova.platform.markov.model.request.CreateModelRequest;
 import com.ova.platform.markov.model.request.MarkovGenerateRequest;
+import com.ova.platform.markov.model.request.MarkovTrainRequest;
 import com.ova.platform.markov.model.response.MarkovGenerateResponse;
+import com.ova.platform.markov.model.response.MarkovTrainResponse;
 import com.ova.platform.markov.model.response.ModelResponse;
 import com.ova.platform.markov.service.MarkovService;
 import com.ova.platform.markov.service.ModelService;
@@ -31,7 +33,7 @@ public class MarkovController {
     @Autowired
     private ModelService modelService;
 
-    // ✅ ENDPOINT EXISTENTE - HU-302
+    // ✅ HU-302: GENERAR TEXTO
     @PostMapping("/generate")
     @Operation(summary = "Generar texto automático",
             description = "Genera texto usando el modelo de Cadenas de Markov.")
@@ -56,8 +58,32 @@ public class MarkovController {
         return ResponseEntity.ok(response);
     }
 
-    // ✅ NUEVOS ENDPOINTS CRUD
+    // ✅ HU-301: ENTRENAR MODELO
+    @PostMapping("/train")
+    @Operation(summary = "Entrenar modelo Markov",
+            description = "Entrena un modelo de Markov con texto personalizado proporcionado por el usuario")
+    public ResponseEntity<ApiResponse<MarkovTrainResponse>> entrenarModelo(
+            @Valid @RequestBody MarkovTrainRequest request) {
 
+        logger.info("Solicitud de entrenamiento - Orden: {}, Texto longitud: {}",
+                request.getOrden(), request.getTextoEntrenamiento().length());
+
+        MarkovTrainResponse result = markovService.entrenarModelo(request);
+
+        ApiResponse<MarkovTrainResponse> response;
+        if (result.isExito()) {
+            response = ApiResponse.success(result, result.getMensaje());
+            logger.info("Entrenamiento exitoso - Estados: {}, Vocabulario: {}",
+                    result.getEstadosGenerados(), result.getVocabularioSize());
+        } else {
+            response = ApiResponse.error(result.getMensaje());
+            logger.warn("Entrenamiento fallido - Error: {}", result.getMensaje());
+        }
+
+        return ResponseEntity.ok(response);
+    }
+
+    // ✅ CRUD: LISTAR MODELOS
     @GetMapping("/models")
     @Operation(summary = "Obtener todos los modelos",
             description = "Retorna la lista de todos los modelos Markov guardados")
@@ -70,6 +96,7 @@ public class MarkovController {
         return ResponseEntity.ok(response);
     }
 
+    // ✅ CRUD: OBTENER MODELO POR ID
     @GetMapping("/models/{id}")
     @Operation(summary = "Obtener modelo por ID",
             description = "Retorna un modelo Markov específico por su ID")
@@ -84,6 +111,7 @@ public class MarkovController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // ✅ CRUD: CREAR MODELO
     @PostMapping("/models")
     @Operation(summary = "Crear nuevo modelo",
             description = "Crea un nuevo modelo Markov con los parámetros especificados")
@@ -101,6 +129,7 @@ public class MarkovController {
         }
     }
 
+    // ✅ CRUD: ACTUALIZAR MODELO
     @PutMapping("/models/{id}")
     @Operation(summary = "Actualizar modelo existente",
             description = "Actualiza un modelo Markov existente")
@@ -117,6 +146,7 @@ public class MarkovController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // ✅ CRUD: ELIMINAR MODELO
     @DeleteMapping("/models/{id}")
     @Operation(summary = "Eliminar modelo",
             description = "Elimina un modelo Markov por su ID")
@@ -133,6 +163,7 @@ public class MarkovController {
         }
     }
 
+    // ✅ HEALTH CHECK
     @GetMapping("/health")
     @Operation(summary = "Health check del servicio Markov")
     public ResponseEntity<ApiResponse<Object>> healthCheck() {

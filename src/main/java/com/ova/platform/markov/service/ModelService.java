@@ -37,7 +37,6 @@ public class ModelService {
     }
 
     public ModelResponse createModel(CreateModelRequest request) {
-        // Verificar si ya existe un modelo con ese nombre
         if (modelRepository.existsByNombre(request.getNombre())) {
             throw new IllegalArgumentException("Ya existe un modelo con el nombre: " + request.getNombre());
         }
@@ -49,13 +48,11 @@ public class ModelService {
         model.setTextoEntrenamiento(request.getTextoEntrenamiento());
         model.setEstado("ACTIVO");
 
-        // Si hay texto de entrenamiento, entrenar el modelo nativo
         if (request.getTextoEntrenamiento() != null && !request.getTextoEntrenamiento().trim().isEmpty()) {
             try {
                 nativeService.initializeModel(request.getOrden());
                 nativeService.trainModel(request.getTextoEntrenamiento());
 
-                // Simular estadísticas (en una implementación real, obtendrías esto de la librería nativa)
                 model.setVocabularioSize(calculateVocabularySize(request.getTextoEntrenamiento()));
                 model.setEstadosCount(calculateStatesCount(request.getTextoEntrenamiento(), request.getOrden()));
 
@@ -79,7 +76,6 @@ public class ModelService {
 
             if (request.getTextoEntrenamiento() != null) {
                 existingModel.setTextoEntrenamiento(request.getTextoEntrenamiento());
-
 
                 try {
                     nativeService.initializeModel(request.getOrden());
@@ -125,7 +121,6 @@ public class ModelService {
         response.setEstado(model.getEstado());
         return response;
     }
-
 
     private int calculateVocabularySize(String text) {
         if (text == null || text.trim().isEmpty()) return 0;

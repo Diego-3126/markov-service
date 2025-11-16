@@ -15,7 +15,6 @@ public class MarkovNativeService {
 
     private static final Logger logger = LoggerFactory.getLogger(MarkovNativeService.class);
 
-
     @Value("${markov.native.library-path:src/main/resources/native/libmarkovova.so}")
     private String libraryPath;
 
@@ -27,7 +26,6 @@ public class MarkovNativeService {
 
     @Value("${markov.native.debug-mode:true}")
     private boolean debugMode;
-
 
     public interface MarkovLibrary extends Library {
         Pointer markov_create_model(int order);
@@ -58,7 +56,6 @@ public class MarkovNativeService {
             } else {
                 logger.warn("⚠️  Librería nativa no encontrada en: {}", libraryPath);
 
-
                 try {
                     System.loadLibrary(libraryName);
                     libraryLoaded = true;
@@ -68,7 +65,6 @@ public class MarkovNativeService {
                 }
             }
 
-            // ✅ CORRECCIÓN: Crear la instancia después de cargar la librería
             if (libraryLoaded) {
                 nativeLibrary = Native.load(libraryName, MarkovLibrary.class);
                 logger.info("✅ Interfaz JNA inicializada para: {}", libraryName);

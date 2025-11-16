@@ -35,8 +35,7 @@ public class MarkovModel {
     private LocalDateTime fechaActualizacion;
 
     @Column(name = "estado")
-    private String estado = "ACTIVO"; // ACTIVO, INACTIVO, ENTRENANDO
-
+    private String estado = "ACTIVO";
 
     public MarkovModel() {
         this.fechaCreacion = LocalDateTime.now();
@@ -49,7 +48,6 @@ public class MarkovModel {
         this.descripcion = descripcion;
         this.orden = orden;
     }
-
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -84,7 +82,6 @@ public class MarkovModel {
 
     public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
-
 
     @PreUpdate
     public void preUpdate() {

@@ -7,52 +7,37 @@ spring:
   application:
     name: markov-service
   profiles:
-    active: dev
+    active: prod  # ← Cambiar a prod para EC2
 
   datasource:
-    url: jdbc:h2:mem:markovdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: ""
+    url: jdbc:mysql://your-rds-endpoint:3306/markovdb  # ← Usar MySQL en RDS
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create-drop
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+      ddl-auto: update
+    show-sql: false  # ← Desactivar en producción
 
-
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-
+# ✅ CONFIGURACIÓN LINUX - CAMBIOS IMPORTANTES
+markov:
+  native:
+    library-path: /home/ec2-user/markov-service/src/main/resources/native/libmarkovova.so  # ← Ruta absoluta en EC2
+    library-name: markovova  # ← Nombre sin "lib" y sin ".so"
+    fallback-enabled: false  # ← Forzar uso de librería real
+    debug-mode: false  # ← Desactivar debug en producción
 
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
+        include: health,info
   endpoint:
     health:
-      show-details: always
-
-
-markov:
-  native:
-    library-path: src/main/resources/native/libmarkovova.so
-    library-name: markov
-    fallback-enabled: true
-    debug-mode: true
+      show-details: when_authorized
 
 logging:
   level:
-    com.ova.platform.markov: DEBUG
-    org.springframework.web: INFO
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type: TRACE
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %-5level - %logger{50} - %msg%n"
+    com.ova.platform.markov: INFO  # ← Solo INFO en producción
+    org.springframework.web: WARN

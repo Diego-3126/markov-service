@@ -13,77 +13,34 @@ public class MarkovGenerateResponse {
     private boolean exito;
     private String mensaje;
 
-
-    public MarkovGenerateResponse() {
-    }
+    public MarkovGenerateResponse() {}
 
     public MarkovGenerateResponse(boolean exito, String mensaje) {
         this.exito = exito;
         this.mensaje = mensaje;
     }
 
+    public String getTextoGenerado() { return textoGenerado; }
+    public void setTextoGenerado(String textoGenerado) { this.textoGenerado = textoGenerado; }
 
-    public String getTextoGenerado() {
-        return textoGenerado;
-    }
+    public String getTextoInicio() { return textoInicio; }
+    public void setTextoInicio(String textoInicio) { this.textoInicio = textoInicio; }
 
-    public void setTextoGenerado(String textoGenerado) {
-        this.textoGenerado = textoGenerado;
-    }
+    public int getLongitudSolicitada() { return longitudSolicitada; }
+    public void setLongitudSolicitada(int longitudSolicitada) { this.longitudSolicitada = longitudSolicitada; }
 
-    public String getTextoInicio() {
-        return textoInicio;
-    }
+    public int getLongitudGenerada() { return longitudGenerada; }
+    public void setLongitudGenerada(int longitudGenerada) { this.longitudGenerada = longitudGenerada; }
 
-    public void setTextoInicio(String textoInicio) {
-        this.textoInicio = textoInicio;
-    }
+    public long getTiempoProcesamientoMs() { return tiempoProcesamientoMs; }
+    public void setTiempoProcesamientoMs(long tiempoProcesamientoMs) { this.tiempoProcesamientoMs = tiempoProcesamientoMs; }
 
-    public int getLongitudSolicitada() {
-        return longitudSolicitada;
-    }
+    public String getModeloUtilizado() { return modeloUtilizado; }
+    public void setModeloUtilizado(String modeloUtilizado) { this.modeloUtilizado = modeloUtilizado; }
 
-    public void setLongitudSolicitada(int longitudSolicitada) {
-        this.longitudSolicitada = longitudSolicitada;
-    }
+    public boolean isExito() { return exito; }
+    public void setExito(boolean exito) { this.exito = exito; }
 
-    public int getLongitudGenerada() {
-        return longitudGenerada;
-    }
-
-    public void setLongitudGenerada(int longitudGenerada) {
-        this.longitudGenerada = longitudGenerada;
-    }
-
-    public long getTiempoProcesamientoMs() {
-        return tiempoProcesamientoMs;
-    }
-
-    public void setTiempoProcesamientoMs(long tiempoProcesamientoMs) {
-        this.tiempoProcesamientoMs = tiempoProcesamientoMs;
-    }
-
-    public String getModeloUtilizado() {
-        return modeloUtilizado;
-    }
-
-    public void setModeloUtilizado(String modeloUtilizado) {
-        this.modeloUtilizado = modeloUtilizado;
-    }
-
-    public boolean isExito() {
-        return exito;
-    }
-
-    public void setExito(boolean exito) {
-        this.exito = exito;
-    }
-
-    public String getMensaje() {
-        return mensaje;
-    }
-
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
-    }
+    public String getMensaje() { return mensaje; }
+    public void setMensaje(String mensaje) { this.mensaje = mensaje; }
 }
